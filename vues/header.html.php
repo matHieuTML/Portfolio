@@ -29,30 +29,20 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item ">
+                        <a class="nav-link " href="<?= lien("message", "liste") ?>" id="navbarDropdown" role="button">
                             Messages
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="<?= lien("message", "liste") ?>">Liste</a>
-                            <a class="dropdown-item" href="<?= lien("message", "ajouter") ?>">Ajouter</a>
-                        </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Abonnés
+                    <li class="nav-item ">
+                        <a class="nav-link " href="<?= lien("projet", "liste") ?>" id="navbarDropdown" role="button">
+                            Projets
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="abonne_liste.php">Liste</a>
-                            <a class="dropdown-item" href="abonne_ajouter.php">Ajouter</a>
-                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Emprunts
+                            Style/Content
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="emprunt_liste.php">Liste</a>
@@ -61,9 +51,5 @@
                     </li>
 
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
             </div>
         </nav>

@@ -16,6 +16,7 @@ abstraite.
 namespace Modeles;
 use PDO;
 use Modeles\Entites\Message;  // avec 'use', on définit un alias à la classe Modeles\Entites\Livre
+use Modeles\Entites\Projet;  
 
 abstract class Bdd {
     public static function pdo()
@@ -62,8 +63,36 @@ abstract class Bdd {
 
     public static function deleteMessage(Message $message)
     {
-        return self::pdo()->exec("DELETE FROM message WHERE id = " . $message->getId());
-        
-        
+        return self::pdo()->exec("DELETE FROM message WHERE id = " . $message->getId()); 
+    }
+
+
+    public static function insertProjet(Projet $projet)
+    {
+        $texteRequete = "INSERT INTO projet (titre, photo, description) 
+                         VALUES (:titre, :photo, :description)";
+        $pdostatement = self::pdo()->prepare($texteRequete);
+        $pdostatement->bindValue(":titre",  $projet->getTitre());
+        $pdostatement->bindValue(":photo", $projet->getPhoto());
+        $pdostatement->bindValue(":description", $projet->getDescription());
+        return $pdostatement->execute();
+    }
+
+    public static function updateProjet(Projet $projet) : bool
+    {
+        $texteRequete = "UPDATE projet 
+                         SET titre = :titre, photo = :photo, description = :description
+                         WHERE id = :id";
+        $pdostatement = self::pdo()->prepare($texteRequete);
+        $pdostatement->bindValue(":titre", $projet->getTitre());
+        $pdostatement->bindValue(":photo", $projet->getPhoto());
+        $pdostatement->bindValue(":description", $projet->getDescription());
+        $pdostatement->bindValue(":id", $projet->getId());
+        return $pdostatement->execute();
+    }
+
+    public static function deleteProjet(Projet $projet)
+    {
+        return self::pdo()->exec("DELETE FROM projet WHERE id = " . $projet->getId()); 
     }
 }

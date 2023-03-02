@@ -1,37 +1,37 @@
-<h1>LES MESSAGES</h1>
+<h1>LES PROJETS</h1>
 <table class="table table-bordered">
     <thead class="thead-dark">
         <tr>
             <th>ID</th>
-            <th>nom</th>
-            <th>Email</th>
-            <th>Contenu</th>
+            <th>titre</th>
+            <th>Photo</th>
+            <th>Description</th>
             <th>Option</th>
         </tr>
     </thead>
 
     <tbody>
-        <?php foreach($message as $message): ?>
+        <?php foreach($projet as $projet): ?>
         <tr>
             <!-- Table Row -->
             <td>
-                <?= $message->getId() ?>
+                <?= $projet->getId() ?>
             </td>
             <td>
-                <?= $message->getNom() ?>
+                <?= $projet->getTitre() ?>
             </td>
             <td>
-                <?= $message->getEmail() ?>
+            <img src="data:image/jpeg;base64,<?php echo base64_encode($projet->getPhoto()); ?>" alt="Ma superbe image" class="img-thumbnail">
             </td>
             <td>
-                <?= $message->getContent() ?>
+                <?= $projet->getDescription() ?>
             </td>
 
             <td>
-                <a href="<?= lien("message", "modifier", $message->getId()) ?>">
+                <a href="<?= lien("projet", "modifier", $projet->getId()) ?>">
                     <i class="fa fa-edit"></i>
                 </a>
-                <a href="<?= lien("message", "supprimer", $message->getid()) ?>">
+                <a href="<?= lien("projet", "supprimer", $projet->getid()) ?>">
                     <i class="fa fa-trash"></i>
                 </a>
             </td>
@@ -39,7 +39,7 @@
         <?php endforeach; ?>
         <tr>
             <td>
-            <a href="<?= lien("message", "ajouter", $message->getId()) ?>"><i class="fas fa-plus text-success"></i></a>
+            <a href="<?= lien("projet", "ajouter", $projet->getId()) ?>"><i class="fas fa-plus text-success"></i></a>
             </td>
         </tr>
     </tbody>
@@ -47,3 +47,4 @@
 
     </tfoot>
 </table>
+
