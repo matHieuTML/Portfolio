@@ -44,19 +44,22 @@ class MessageControleur {
     public function ajouterUser()
     {
         if( $_POST ){
-
-            // A FAIRE : validation du formulaire
-            $l = new Message;
-            $l->setNom($_POST["nom"]);
-            $l->setEmail($_POST["email"]);
-            $l->setContent($_POST["content"]);
-        
-            $resultat = Bdd::insertMessage($l);
-        
-            if( $resultat ){
-                header("Location: message_liste.php");
-                exit;
-            } else {
+            if (preg_match('/^[^<>\'"0-9!?]+$/', $_POST['nom']) && preg_match('/^[^<>\'"0-9!?]+$/', $_POST['email']) && preg_match('/^[^<>\'"0-9!?]+$/', $_POST['content'])) {                
+                // A FAIRE : validation du formulaire
+                $l = new Message;
+                $l->setNom($_POST["nom"]);
+                $l->setEmail($_POST["email"]);
+                $l->setContent($_POST["content"]);
+            
+                $resultat = Bdd::insertMessage($l);
+            
+                if( $resultat ){
+                    header("Location: message_liste.php");
+                    exit;
+                } else {
+                    echo "Erreur SQL lors de l'insertion";
+                }
+            }else {
                 echo "Erreur SQL lors de l'insertion";
             }
         }

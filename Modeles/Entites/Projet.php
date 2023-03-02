@@ -2,6 +2,7 @@
 namespace Modeles\Entites;
 class Projet {
     private $id;
+    private $lang;
     private $titre;
     private $photo;
     private $description;
@@ -46,20 +47,13 @@ class Projet {
 
         return $this;
     }
-
-    /**
-     * Get the value of photo
-     */ 
+ 
     public function getPhoto()
     {
         return $this->photo;
     }
 
-    /**
-     * Set the value of photo
-     *
-     * @return  self
-     */ 
+
     public function setPhoto($photo)
     {
         $this->photo = $photo;
@@ -67,22 +61,29 @@ class Projet {
         return $this;
     }
 
-    /**
-     * Get the value of description
-     */ 
+
     public function getDescription()
     {
         return $this->description;
     }
 
-    /**
-     * Set the value of description
-     *
-     * @return  self
-     */ 
+
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getLang()
+    {
+        return $this->lang;
+    }
+
+
+    public function setLang($lang)
+    {
+        $this->lang = $lang;
 
         return $this;
     }

@@ -1,134 +1,144 @@
-const $ = {};
+"use strict";
+const nav1 = document.getElementById("nav-item-1");
+const nav2 = document.getElementById("nav-item-2");
+const nav3 = document.getElementById("nav-item-3");
 
-$.rand = function( min, max ) {
-	return Math.random() * ( max - min ) + min;	
-};
+const content1 = document.getElementById("content-item-1");
+const content1i = document.getElementById("gallery");
+const content1hr = document.getElementById("hr-gallery");
+const content1lang = document.getElementById("lang");
+const content1js = document.getElementById("js");
+const content1php = document.getElementById("php");
+const content1html = document.getElementById("html");
 
-$.point = function( parent, index ) {
-	this.parent = parent;
-	this.index = index;
-	this.reset();
-};
+const content1jspage = document.getElementById("jspage");
+const content1phppage = document.getElementById("phppage");
+const content1htmlpage = document.getElementById("htmlpage");
+const page = document.querySelectorAll(".page");
+const close = document.querySelectorAll(".close");
 
-$.point.prototype = THREE.Vector3;
 
-$.point.prototype.reset = function() {
-	this.noiseDirection = 0;
-	this.noiseMagnitude = 0;
-	this.speed = $.rand( 4, 6 );	
-	this.x = $.rand( -$.w / 2, $.w / 2 );
-	this.y = $.rand( -$.h / 2, $.h / 2 );
-	this.z = 0;
-	this.cx = 0;
-	this.cy = 0;
-	this.vx = $.rand( -1, 1 );
-	this.vy = $.rand( -1, 1 );
-};
+const content2 = document.getElementById("content-item-2");
+const content3i = document.getElementById("contact");
+const content3hr = document.getElementById("hr-best");
+const content3hr1 = document.getElementById("hr-1");
 
-$.point.prototype.setColor = function( color ) {
-	$.points.geometry.colors[ this.index ] = new THREE.Color("white");
-};
 
-$.point.prototype.step = function() {	
-	this.x += this.vx;
-	this.y += this.vy;
-	this.cx = Math.max( 0, Math.min( $.cols - 1, Math.floor( (this.x + $.w / 2 ) / $.unitW ) ) );
-	this.cy = Math.max( 0, Math.min( $.rows - 1, Math.floor( ( this.y + $.h / 2 ) / $.unitH ) ) );
 
-	let _noise1 = $.noiseDirectionLookup[ this.cx * $.cols + this.cy ];
-	_noise1 = Math.min( 1,  _noise1 );
-	_noise1 = Math.max( -1, _noise1 );
-	this.noiseDirection = ( _noise1 + 1 ) * Math.PI * 2;
 
-	let _noise2 = $.noiseMagnitudeLookup[ this.cx * $.cols + this.cy ];
-	_noise2 = Math.min( 1, _noise2 );
-	_noise2 = Math.max( -1, _noise2 );
-	this.noiseMagnitude = 0.2 + ( _noise2 + 1 ) / 2;
+const content3 = document.getElementById("content-item-3");
 
-	this.vxTarget = Math.cos( this.noiseDirection + $.rand( -0.05, 0.05 ) ) * this.noiseMagnitude * this.speed;
-	this.vyTarget = Math.sin( this.noiseDirection + $.rand( -0.05, 0.05 ) ) * this.noiseMagnitude * this.speed;
+//nav bar
+nav1.addEventListener("click", function() {
+    nav1.classList.add("souligne");
+    nav2.classList.remove("souligne");
+    nav3.classList.remove("souligne");
+  content1.classList.add("show-1");
+  content1i.classList.replace("no-ap","ap");
+  content3i.classList.replace("ap","no-ap");
+  content2.classList.remove("show-2");
+  content3.classList.remove("show");
+});
 
-	this.vx += ( this.vxTarget - this.vx ) * 0.05;
-	this.vy += ( this.vyTarget - this.vy ) * 0.05;
+nav2.addEventListener("click", function() {
+    nav2.classList.add("souligne");
+    nav3.classList.remove("souligne");
+    nav1.classList.remove("souligne");
+  content2.classList.add("show-2");
+  content1.classList.remove("show-1");
+  content1i.classList.replace("ap","no-ap");
+  content3i.classList.replace("ap","no-ap");
+  content3.classList.remove("show");
+});
+nav3.addEventListener("click", function() {
+    nav1.classList.remove("souligne");
+    nav3.classList.add("souligne");
+    nav2.classList.remove("souligne");
+  content3.classList.add("show");
+  content1.classList.remove("show-1");
+  content1i.classList.replace("ap","no-ap");
+  content3i.classList.replace("no-ap","ap");
+  content2.classList.remove("show-2");
+});
 
-	if ( 
-		this.x > $.w / 2 ||
-		this.x < -$.w / 2 ||
-		this.y > $.h / 2 ||
-		this.y < -$.h / 2
-	) {
-		this.reset();
-	}
-};
 
-$.init = function() {	
-	$.w = 2000;
-	$.h = 1140;
-	$.cols = 30,
-	$.rows = 30,
-	$.unitW = $.w / $.cols;
-	$.unitH = $.h / $.rows;
-	$.offInc = 0.06,
-	$.tickMult = 0.003,
-	$.tick = 0,
-	$.simplex = new SimplexNoise();	
-	$.scene = new THREE.Scene();
-	$.scene.background = new THREE.Color(0x0D0D0D);
-	$.noiseDirectionLookup = [];
-	$.noiseMagnitudeLookup = [];
+//contenu 1 faire apparaitre la liste de langages
+content1.addEventListener("mouseover", function() {
+    content1lang.classList.replace('cont-in', 'cont-vi');
+    content1i.classList.replace('img-in', 'img-vi');
+    content1.classList.replace('c-i-in', 'c-i-vi');
+    content1hr.classList.replace('hr-in', 'hr-vi');
+});
+content1.addEventListener("mouseout", function() {
+    if (content1jspage.classList.contains('show-page') || content1phppage.classList.contains('show-page') || (content1htmlpage.classList.contains('show-page'))) {  
+    }
+    else{
+        content1lang.classList.replace('cont-vi', 'cont-in');  
+        content1hr.classList.replace('hr-vi', 'hr-in');
+        content1.classList.replace('c-i-vi', 'c-i-in');
+        content1i.classList.replace('img-vi', 'img-in');
+    }
+});
+//faire apparaitre les projets 
+content1js.addEventListener("click", function() {
+    content1jspage.classList.add("show-page");
+    content1phppage.classList.remove("show-page");
+    content1htmlpage.classList.remove("show-page");
+});
+content1php.addEventListener("click", function() {
+    content1phppage.classList.add("show-page");
+    content1jspage.classList.remove("show-page");
+    content1htmlpage.classList.remove("show-page");
+});
+content1html.addEventListener("click", function() {
+    content1htmlpage.classList.add("show-page");
+    content1jspage.classList.remove("show-page");
+    content1phppage.classList.remove("show-page");
+});
+//faire disparaitre les la page des projets
+for(let i = 0; i < close.length; i++) {
+    close[i].addEventListener("click", function() {
+        console.log(page[i].id);
+        //avec des plus et moins
+        page[i].classList.remove("show-page");
+})};
 
-	$.camera = new THREE.OrthographicCamera( -$.w / 2, $.w / 2, $.h / 2, -$.h / 2, 1, 10000 );
-	$.camera.position.z = $.w / 2;
-	
-	$.renderer = new THREE.WebGLRenderer( {
-		antialias: true	
-	});
-	$.renderer.setSize( $.w, $.h );
-	$.renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
-	document.body.appendChild( $.renderer.domElement );
-	
-	$.count = 60000;
-	$.geometry = new THREE.Geometry();
-	for ( let i = 0; i < $.count; i ++ ) {
-		$.geometry.vertices.push( new $.point( $.geometry, i ) );
-	}
-	$.material = new THREE.PointsMaterial({
-		// blending: THREE.MultiplyBlending,
-		size: 1,
-		transparent: true,
-		vertexColors: THREE.VertexColors
-	});
-	$.points = new THREE.Points( $.geometry, $.material );
-	$.scene.add( $.points );
-	
-	$.points.geometry.vertices.forEach( function( point ) {
-		point.setColor();
-	});
-	
-	$.loop();
-};
+//faire apparaitre les projets 
+let titrejs = document.querySelectorAll(".titrejs");
+let projetjs = document.querySelectorAll('.projetjs');
+/*
+titrejs[0].addEventListener("click", function() {
+    projetjs[0].classList.toggle("no-ap");
+});
+for(let j = 0; j < titrejs.length; j++) {
+    titrejs[j].addEventListener("click", function() {
+        projetjs[j].classList.toggle("no-ap");
+        
+})};
+*/
+for (let i = 0; i < titrejs.length; i++) {
+    titrejs[i].addEventListener("click", function() {
+      // hide all projetjs elements
+      for (let j = 0; j < projetjs.length; j++) {
+        projetjs[j].style.display = "none";
+      }
+      // show the corresponding projetjs element
+      projetjs[i].style.display = "block";
+    });
+}
 
-$.step = function() {	
-	for( let i = 0; i < $.cols * $.rows; i++ ) {
-		let _cx = i % $.cols;
-		let _cy = Math.floor( i / $.cols );
-		$.noiseDirectionLookup[ i ] = $.simplex.noise3D( $.offInc * _cx, $.offInc * _cy, $.tick * $.tickMult );
-		$.noiseMagnitudeLookup[ i ] = $.simplex.noise3D( $.offInc * _cx, $.offInc * _cy, $.tick * $.tickMult + 1000 );
-	}
-	
-	$.points.geometry.vertices.forEach( function( point ) {
-		point.step();
-	});
-	
-	$.points.geometry.verticesNeedUpdate = true;
-	
-	$.tick++;
-};
+//contact
+content3.addEventListener("mouseover", function() {
+    content3.classList.replace('c-i-in', 'c-i-3');
+    content3hr.classList.replace('hr-in', 'hr-vi');
+    content3hr1.classList.replace('no-barre', "barre");
+    content3i.style.marginLeft="50px";
 
-$.loop = function() {
-	requestAnimationFrame( $.loop );
-	$.step();
-	$.renderer.render( $.scene, $.camera );
-};
+});
+content3.addEventListener("mouseout", function() {
+    content3.classList.replace('c-i-3', 'c-i-in');
+    content3hr.classList.replace('hr-vi', 'hr-in');
+    content3hr1.classList.replace("barre", 'no-barre');
+    content3i.style.marginLeft="0px";
 
-$.init();
+});

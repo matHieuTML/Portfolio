@@ -1,0 +1,14 @@
+
+<?php/* foreach($projetjs as $p): ?>
+    <p>
+        <?= $p->getId() ?>
+    
+
+        <?= $p->getTitre() ?>
+
+        <img src="data:image/jpeg;base64,<?php echo base64_encode($p->getPhoto()); ?>" alt="Ma superbe image" class="img-thumbnail">
+
+        <?= $p->getDescription() ?>
+    </p>
+
+<?php endforeach; */ ?>

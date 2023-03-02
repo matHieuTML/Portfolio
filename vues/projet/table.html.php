@@ -3,6 +3,7 @@
     <thead class="thead-dark">
         <tr>
             <th>ID</th>
+            <th>Language</th>
             <th>titre</th>
             <th>Photo</th>
             <th>Description</th>
@@ -16,6 +17,9 @@
             <!-- Table Row -->
             <td>
                 <?= $projet->getId() ?>
+            </td>
+            <td>
+                <?= $projet->getLang() ?>
             </td>
             <td>
                 <?= $projet->getTitre() ?>

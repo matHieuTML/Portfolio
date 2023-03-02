@@ -14,6 +14,12 @@ class ProjetControleur {
         include "vues/projet/table.html.php";
         include "vues/footer.html.php";        
     }
+    public function listeUser($projet, $lang)
+    {
+        $projet = Bdd::select($projet, $lang);
+        return $projet;
+        
+    }
 
     public function ajouter()
     {
@@ -21,6 +27,7 @@ class ProjetControleur {
 
             // A FAIRE : validation du formulaire
             $l = new Projet;
+            $l->setLang($_POST["lang"]);
             $l->setTitre($_POST["titre"]);
             $l->setPhoto($_POST["photo"]);
             $l->setDescription($_POST["description"]);
@@ -47,6 +54,7 @@ class ProjetControleur {
 
             // A FAIRE : validation du formulaire
             $l = new Projet;
+            $l->setLang($_POST["lang"]);
             $l->setTitre($_POST["titre"]);
             $l->setPhoto($_POST["photo"]);
             $l->setDescription($_POST["description"]);
@@ -68,6 +76,7 @@ class ProjetControleur {
         $projet = Bdd::selectById("projet", $id);
         
         if($_POST){
+            $lang = $_POST["lang"] ?? null;
             $titre = $_POST["titre"] ?? null;
             $photo = $_POST["photo"] ?? null;
             $description = $_POST["description"] ?? null;
@@ -85,6 +94,7 @@ class ProjetControleur {
             }
         
             if( empty($erreurs) ){
+                $projet->setLang($lang);
                 $projet->setTitre($titre);
                 $projet->setPhoto($photo);
                 $projet->setDecription($description);

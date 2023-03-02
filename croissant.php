@@ -5,7 +5,7 @@ session_start();
 // Vérification de la présence d'une variable de session indiquant que l'utilisateur est en mode admin
 if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
   // Si l'utilisateur n'est pas en mode admin, on vérifie si un formulaire de connexion a été soumis
-  if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['username'] === 'example' && $_POST['password'] === 'example123') {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['username'] === 'admin' && $_POST['password'] === 'password') {
     // Si le formulaire de connexion a été correctement rempli, on passe l'utilisateur en mode admin
     $_SESSION['admin'] = true;
   } else {
